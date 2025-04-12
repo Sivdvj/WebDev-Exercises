@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>23BCE1158</title>
+    <script>
+        const seats=new Array(10).fill(0);
+
+        function bookSeat(){
+            let name=document.getElementById("name").value;
+            let section=parseInt(document.getElementById("section").value);
+            let seatNumber=-1;
+            
+            if(section===1){
+                seatNumber=seats.indexOf(0, 0);
+                if (seatNumber>=0 && seatNumber<5){
+                    seats[seatNumber]=1;
+                }else{
+                    let acceptEconomy=confirm("First class is full. Would you like to book an economy seat?");
+                    if(acceptEconomy){
+                        seatNumber=seats.indexOf(0, 5);
+                        if(seatNumber!==-1) seats[seatNumber]=1;
+                    }
+                }
+            }else if(section === 2){
+                seatNumber=seats.indexOf(0, 5);
+                if(seatNumber>=5 && seatNumber<10){
+                    seats[seatNumber]=1;
+                }else{
+                    let acceptFirstClass=confirm("Economy is full. Would you like to book a first-class seat?");
+                    if(acceptFirstClass){
+                        seatNumber=seats.indexOf(0, 0);
+                        if(seatNumber!==-1)seats[seatNumber]=1;
+                    }
+                }
+            }
+            
+            if(seatNumber!==-1 && seats[seatNumber]===1){
+                alert(`Boarding Pass:\nName: ${name}\nSeat Number: ${seatNumber + 1}\nClass: ${seatNumber < 5 ? 'First Class' : 'Economy'}`);
+            }else{
+                alert("Sorry, no seats available.");
+            }
+        }
+    </script>
+</head>
+<body>
+    <h2>Airline Seat Reservation</h2>
+    <label for="name">Enter your name:</label>
+    <input type="text" id="name"><br><br>
+    <label for="section">Select Class (1 for First Class, 2 for Economy):</label>
+    <input type="text" id="section"><br><br>
+    <button onclick="bookSeat()">Book a Seat</button>
+</body>
+</html>

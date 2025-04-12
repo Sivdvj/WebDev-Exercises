@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width,
+initial-scale=1.0" />
+ <title>23BCE1158</title>
+ <style>
+ h1 {
+ position: relative;
+ }
+ </style>
+ </head>
+ <body>
+ <h1 id="z1">BOX 1 Z-INDEX VALUE: 1</h1>
+ <h1 id="z2">BOX 2 Z-INDEX VALUE: 2</h1>
+ <h1 id="z3">BOX 3 Z-INDEX VALUE: 3</h1>
+ <script>
+ var outer = document.createElement("div");
+ document.body.appendChild(outer);
+ var num = 1;
+ var x = 10;
+ outer.style.height = "200px";
+ outer.style.width = "200px";
+ outer.style.position = "relative";
+ function creatediv(color) {
+ var inner = document.createElement("div");
+ inner.setAttribute("id", `${num}`);
+ inner.setAttribute(
+ "style",
+ `position:
+absolute;top:${x}px;left:${x}px;height:140px;width:140px;z-index
+:${num}`
+ );
+ inner.style.backgroundColor = color;
+ x += 10;
+ num++;
+ outer.appendChild(inner);
+ }
+ creatediv("red");
+ creatediv("green");
+ creatediv("blue");
+ var select = document.createElement("select");
+ select.innerHTML = ` <option selected="true" value="1">Box
+1</option><option value="2">Box 2</option><option value="3">Box
+3</option>`;
+ document.body.appendChild(select);
+ var input = document.createElement("input");
+ input.style.marginLeft = "10px";
+ input.setAttribute("placeholder", "Enter z-index");
+ document.body.appendChild(input);
+ var submit = document.createElement("button");
+ submit.innerText = "submit";
+ document.body.appendChild(submit);
+ submit.addEventListener("click", () => {
+ num = select.value;
+ var inner = document.getElementById(num);
+ var z = input.value;
+ inner.style.zIndex = z;
+ var head = document.getElementById(`z${num}`);
+ head.innerText = `BOX ${num} Z-INDEX VALUE: ${z}`;
+ });
+ </script>
+ </body>
+</html>

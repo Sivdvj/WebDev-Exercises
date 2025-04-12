@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+        .form-group {
+            margin-bottom: 10px;
+        }
+    </style>
+    <script>
+        function updateTime() {
+            let now = new Date();
+            document.getElementById("timeDisplay").innerHTML = now.toLocaleTimeString();
+        }
+        setInterval(updateTime, 1000);
+
+        function validateForm() {
+            let isValid = true;
+
+            function showError(id, message) {
+                document.getElementById(id).innerText = message;
+                if (message) isValid = false;
+            }
+
+            let name = document.getElementById("name").value.trim();
+            let address = document.getElementById("address").value.trim();
+            let zip = document.getElementById("zip").value.trim();
+            let country = document.getElementById("country").value;
+            let phone = document.getElementById("phone").value.trim();
+            let email = document.getElementById("email").value.trim();
+            let password = document.getElementById("password").value;
+            let confirmPassword = document.getElementById("confirmPassword").value;
+            let pan = document.getElementById("pan").value.trim();
+
+            showError("nameError", name === "" ? "Name is required" : name.length > 15 ? "Max 15 characters allowed" : "");
+            showError("addressError", address === "" ? "Address is required" : "");
+            showError("zipError", zip === "" ? "Zip code is required" : !/^\d+$/.test(zip) ? "Zip must be numeric" : "");
+            showError("countryError", country === "" ? "Select a country" : "");
+            showError("phoneError", phone === "" ? "Phone is required" : !/^\d{10}$/.test(phone) ? "Phone must be 10 digits" : "");
+            showError("emailError", email === "" ? "Email is required" : !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? "Invalid email format" : "");
+            showError("passwordError", password === "" ? "Password is required" : !/^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[\W_]).{8,15}$/.test(password) ? 
+            "Password must be 8-15 chars, include a number & special char" : "");
+            showError("confirmPasswordError", confirmPassword === "" ? "Confirm password" : password !== confirmPassword ? "Passwords do not match" : "");
+            showError("panError", pan === "" ? "PAN is required" : !/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(pan) ? "Invalid PAN (ABCDE1234F)" : "");
+
+            return isValid;
+        }
+    </script>
+</head>
+<body>
+    <form onsubmit="return validateForm()">
+        <h2>Form Validation</h2>
+        <div style="text-align: right;">
+            <span id="timeDisplay"></span>
+        </div>
+
+        <div class="form-group">
+            <label>Name*:</label>
+            <input type="text" id="name">
+            <span id="nameError" class="error"></span>
+        </div>
+
+        <div class="form-group">
+            <label>Address*:</label>
+            <textarea id="address"></textarea>
+            <span id="addressError" class="error"></span>
+        </div>
+
+        <div class="form-group">
+            <label>Zip Code*:</label>
+            <input type="text" id="zip">
+            <span id="zipError" class="error"></span>
+        </div>
+
+        <div class="form-group">
+            <label>Country*:</label>
+            <select id="country">
+                <option value="">Please select...</option>
+                <option value="India">India</option>
+                <option value="USA">USA</option>
+            </select>
+            <span id="countryError" class="error"></span>
+        </div>
+
+        <div class="form-group">
+            <label>Phone*:</label>
+            <input type="text" id="phone">
+            <span id="phoneError" class="error"></span>
+        </div>
+
+        <div class="form-group">
+            <label>Email*:</label>
+            <input type="text" id="email">
+            <span id="emailError" class="error"></span>
+        </div>
+
+        <div class="form-group">
+            <label>Password*:</label>
+            <input type="password" id="password">
+            <span id="passwordError" class="error"></span>
+        </div>
+
+        <div class="form-group">
+            <label>Verify Password*:</label>
+            <input type="password" id="confirmPassword">
+            <span id="confirmPasswordError" class="error"></span>
+        </div>
+
+        <div class="form-group">
+            <label>PAN No*:</label>
+            <input type="text" id="pan">
+            <span id="panError" class="error"></span>
+        </div>
+
+        <button type="submit">SEND</button>
+    </form>
+</body>
+</html>

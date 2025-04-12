@@ -1,0 +1,43 @@
+<html>
+    <head><script>
+        function myFunction() {
+        var x = document.createElement("FORM");
+        x.setAttribute("name", "myForm");
+        document.body.appendChild(x);
+        var y = document.createElement("INPUT");
+        y.setAttribute("type", "text");
+        y.setAttribute("style", "color:white;background-color:blue;");
+        y.setAttribute("onfocus", "changecolor(this)");
+        y.setAttribute("onblur", "changecol(this)");
+        var z = document.createElement("INPUT");
+        z.setAttribute("type", "button");
+        z.setAttribute("value", "Click Me");
+        z.setAttribute("style", "color:white;background-color:green;");
+        z.setAttribute("onmouseover", "changebcolor(this)");
+        z.setAttribute("onmouseout", "changebcol(this)");
+        var br = document.createElement("br");
+        myForm.appendChild(y);
+        myForm.appendChild(br);
+        myForm.appendChild(br.cloneNode());
+        myForm.appendChild(br.cloneNode());
+        myForm.appendChild(z);  
+        }
+        function changecolor(y) {
+ y.style.background="pink";
+ y.value="";
+ }
+ function changecol(y) {
+ y.style.background="blue";
+ y.value="Hi! Welcome";
+ }
+ function changebcolor(y) {
+ y.style.background="blue";
+ }
+ function changebcol(y) {
+ y.style.background="green";
+ }
+ </script>
+ </head>
+ <body onload="myFunction()">
+ </body>
+ </html>

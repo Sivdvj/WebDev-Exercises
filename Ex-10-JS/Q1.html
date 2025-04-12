@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>23BCE1158</title>
+</head>
+<body>
+
+    <button onclick="sortdec(event)">SORT PATIENTS</button><br><br>
+
+    <form id="form1" onsubmit="search(event)">
+        Search Patient <input type="text" id="pid">
+        <input type="submit" value="Search">
+    </form><br>
+
+    <form id="form2" onsubmit="filter(event)">
+        Search Patients within age 
+        <input type="number" id="age1"> to 
+        <input type="number" id="age2">
+        <input type="submit" value="Filter">
+    </form><br><br>
+
+    <table id="table" border="2">
+        <tr>
+            <th>P-Id</th>
+            <th>Name</th>
+            <th>Age</th>
+        </tr>
+        <tr><td>1</td><td>Alen</td><td>39</td></tr>
+        <tr><td>2</td><td>Deena</td><td>47</td></tr>
+        <tr><td>3</td><td>Diana</td><td>21</td></tr>
+        <tr><td>4</td><td>Jack</td><td>54</td></tr>
+        <tr><td>5</td><td>Jain</td><td>23</td></tr>
+        <tr><td>6</td><td>Kelvin</td><td>61</td></tr>
+        <tr><td>7</td><td>Louis</td><td>69</td></tr>
+        <tr><td>8</td><td>Rex</td><td>49</td></tr>
+    </table>
+
+    <script>
+        const patients=[
+            {id: 1, name: "Alen", age: 39},
+            {id: 2, name: "Deena", age: 47},
+            {id: 3, name: "Diana", age: 21},
+            {id: 4, name: "Jack", age: 54},
+            {id: 5, name: "Jain", age: 23},
+            {id: 6, name: "Kelvin", age: 61},
+            {id: 7, name: "Louis", age: 69},
+            {id: 8, name: "Rex", age: 49}
+        ];
+
+        function sortdec(event){
+            event.preventDefault();
+            patients.sort((a, b) => b.age - a.age);
+            renderTable(patients);
+        }
+
+        function search(event){
+            event.preventDefault();
+            let id=parseInt(document.getElementById("pid").value);
+            if(id < 1 || id > 8){
+                alert("No such P-ID available");
+                return;
+            }
+            let result=patients.find(patient => patient.id === id);
+            renderTable([result]);
+        }
+
+        function filter(event){
+            event.preventDefault();
+            let age1=parseInt(document.getElementById("age1").value);
+            let age2=parseInt(document.getElementById("age2").value);
+
+            if(age1 > age2){
+                alert("Invalid Range");
+                return;
+            }
+
+            let filteredPatients=patients.filter(patient => patient.age >= age1 && patient.age <= age2);
+            renderTable(filteredPatients);
+        }
+
+        function renderTable(data){
+            let table=document.getElementById("table");
+            table.innerHTML=`
+                <tr>
+                    <th>P-Id</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                </tr>
+            `;
+            data.forEach(patient => {
+                table.innerHTML += `
+                    <tr>
+                        <td>${patient.id}</td>
+                        <td>${patient.name}</td>
+                        <td>${patient.age}</td>
+                    </tr>
+                `;
+            });
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic DOM Tasks</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script>
+        // (i) Create a simple stopwatch
+        let timer;
+        let seconds = 0;
+
+        const startButton = document.createElement("button");
+        startButton.textContent = "Start";
+        startButton.addEventListener("click", () => {
+            clearInterval(timer);
+            timer = setInterval(() => {
+                seconds++;
+                let hrs = Math.floor(seconds / 3600);
+                let mins = Math.floor((seconds % 3600) / 60);
+                let secs = seconds % 60;
+                stopwatchDisplay.textContent = `Time: ${hrs}h ${mins}m ${secs}s`;
+            }, 1000);
+        });
+
+        const stopButton = document.createElement("button"); // Fixed typo
+        stopButton.textContent = "Stop";
+        stopButton.addEventListener("click", () => clearInterval(timer));
+
+        const resetButton = document.createElement("button");
+        resetButton.textContent = "Reset";
+        resetButton.addEventListener("click", () => {
+            clearInterval(timer);
+            seconds = 0;
+            stopwatchDisplay.textContent = "Time: 0h 0m 0s";
+        });
+
+        const stopwatchDisplay = document.createElement("p");
+        stopwatchDisplay.textContent = "Time: 0h 0m 0s";
+
+        document.body.append(startButton, stopButton, resetButton, stopwatchDisplay);
+
+        // (ii) Calculate age on mouseover
+        const dobInput = document.createElement("input");
+        dobInput.type = "date";
+        dobInput.placeholder = "Enter Date of Birth";
+
+        dobInput.addEventListener("mouseover", () => {
+            const dob = new Date(dobInput.value);
+            if (!isNaN(dob.getTime())) {
+                const today = new Date();
+                let age = today.getFullYear() - dob.getFullYear();
+                const monthDiff = today.getMonth() - dob.getMonth();
+                const dayDiff = today.getDate() - dob.getDate();
+                
+                if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+                    age--;
+                }
+                
+                alert(`Your age is: ${age} years`);
+            }
+        });
+
+        document.body.appendChild(dobInput);
+
+        // (iii) Create a textarea with a character counter
+        const textarea = document.createElement("textarea");
+        const charCount = document.createElement("p");
+        charCount.textContent = "Characters: 0";
+
+        textarea.addEventListener("input", () => {
+            charCount.textContent = `Characters: ${textarea.value.length}`;
+        });
+
+        document.body.append(textarea, charCount);
+</script>
+</body>
+</html>

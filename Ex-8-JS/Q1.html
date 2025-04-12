@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>23BCE1158</title>
+    <script>
+        let num1=parseInt(prompt("Enter First Number: "));
+        let num2=parseInt(prompt("Enter Second Number: "));
+        let ops=prompt("Enter operation: (+, -, /, %, *)");
+        let result;
+
+        switch(ops){
+            case "+": 
+                result=num1+num2;
+                alert(`${num1} + ${num2} = ${result}`);
+                break;
+            case "-":
+                result=num1-num2;
+                alert(`${num1} - ${num2} = ${result}`);
+                break;
+            case "*":
+                result=num1*num2;
+                alert(`${num1} x ${num2} = ${result}`);
+                break;
+            case "/":
+                if(num2!=0){
+                    result=num1/num2;
+                    alert(`${num1} / ${num2} = ${result}`);
+                }else{
+                    alert("Error Division By Zero");
+                }
+                break;
+            case "%":
+                if(num2!=0){    
+                    result=num1%num2;
+                    alert(`${num1} % ${num2} = ${result}`);
+                }else{
+                    alert("Error Division By Zero");
+                }
+                break;
+            default:
+                alert("Invalid Operation");
+        } 
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

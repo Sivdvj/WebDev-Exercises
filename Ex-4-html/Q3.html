@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Feedback 23BCE1158</title>
+</head>
+<body>
+    <h2>Product Feedback</h2>
+
+    <form>
+        <label for="slider1">Slider 1 (Quality): </label>
+        <input id="slider1" type="range" min="1" max="10" value="5" oninput="output1.value=this.value; total.value=parseInt(slider1.value)+parseInt(slider2.value)+parseInt(slider3.value)">
+        <output id="output1" for="slider1">5</output><br><br>
+        <label for="slider2">Slider 2 (Quantity): </label>
+        <input id="slider2" type="range" min="1" max="10" value="5" oninput="output2.value=this.value; total.value=parseInt(slider1.value)+parseInt(slider2.value)+parseInt(slider3.value)">
+        <output id="output2" for="slider2">5</output><br><br>
+        <label for="slider1">Slider 3 (Price): </label>
+        <input id="slider3" type="range" min="1" max="10" value="5" oninput="output3.value=this.value; total.value=parseInt(slider1.value)+parseInt(slider2.value)+parseInt(slider3.value)">
+        <output id="output3" for="slider3">5</output><br><br>
+        <output id="total" for="slider1 slider2 slider3">15</output>
+    </form>
+</body>
+</html>

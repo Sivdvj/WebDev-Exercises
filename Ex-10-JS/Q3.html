@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>23BCE1158</title>
+    <style>
+        img{
+            border-radius: 50%;
+        }
+
+        input{
+            border-radius: 5px;
+            padding: 5px;
+            border: 1px solid #ccc;
+        }
+
+        body{
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container{
+            background-color: #a0a98b;
+            padding: 20px;
+            border-radius: 10px;
+            width: 380px;
+        }
+
+        h2{
+            text-align: center;
+        }
+
+        .input-group{
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .input-group input{
+            width: 50%;
+        }
+
+        .product{
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .product img{
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+
+        button{
+            width: 100%;
+            background-color: #8a6d3b;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Grocery Order Form</h2>
+        <form id="orderForm">
+            <strong>Customer Name</strong><br><br>
+            <div class="input-group">
+                <input type="text" id="firstName" required>
+                <input type="text" id="lastName" required>
+            </div>
+
+            <strong>Phone Number</strong><br><br>
+            <div class="input-group">
+                <input type="text" id="countryCode" required>
+                <input type="tel" id="phone" pattern="^\d{10}$" title="Phone number must be 10 digits" required>
+            </div>
+
+            <strong>Email</strong><br><br>
+            <input type="email" id="email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Enter a valid email address" required>
+            <br><br>
+
+            <h3>Products</h3>
+
+            <div class="product">
+                <img src="apple.png" alt="Apple">
+                <input type="checkbox" class="product-checkbox" data-price="10" value="Apple">
+                Apple &ensp; &ensp; &ensp; $10 &ensp; &ensp; &ensp;
+                <input type="number" class="product-quantity" min="1" max="10" value="1"> kg
+            </div>
+
+            <div class="product">
+                <img src="banana.png" alt="Banana">
+                <input type="checkbox" class="product-checkbox" data-price="5" value="Banana">
+                Banana &ensp; &ensp; &ensp; $5 &ensp; &ensp; &ensp;
+                <input type="number" class="product-quantity" min="1" max="10" value="1"> kg
+            </div>
+
+            <div class="product">
+                <img src="avocado.png" alt="Avocado">
+                <input type="checkbox" class="product-checkbox" data-price="7" value="Avocado">
+                Avocado &ensp; &ensp; &ensp; $7 &ensp; &ensp; &ensp;
+                <input type="number" class="product-quantity" min="1" max="10" value="1"> kg
+            </div>
+
+            <br>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("orderForm").addEventListener("submit", function (event){
+            event.preventDefault();
+
+            let firstName=document.getElementById("firstName").value;
+            let lastName=document.getElementById("lastName").value;
+            let countryCode=document.getElementById("countryCode").value;
+            let phone=document.getElementById("phone").value;
+            let email=document.getElementById("email").value;
+            let selectedProducts=[];
+            let checkboxes=document.querySelectorAll(".product-checkbox");
+            let quantities=document.querySelectorAll(".product-quantity");
+            let totalPrice=0;
+
+            checkboxes.forEach((checkbox, index) =>{
+                if (checkbox.checked){
+                    let productName=checkbox.value;
+                    let productPrice=parseFloat(checkbox.getAttribute("data-price"));
+                    let productQuantity=parseInt(quantities[index].value);
+                    let productTotal=productPrice * productQuantity;
+                    totalPrice += productTotal;
+                    selectedProducts.push(
+                        `<li>${productName} - $${productPrice} x ${productQuantity}kg=$${productTotal}</li>`
+                    );
+                }
+            });
+
+            document.write(`
+                <div class="container">
+                    <h2>Order Receipt</h2>
+                    <p><strong>Name:</strong> ${firstName} ${lastName}</p>
+                    <p><strong>Phone:</strong> ${countryCode} ${phone}</p>
+                    <p><strong>Email:</strong> ${email}</p>
+                    <h3>Products Ordered:</h3>
+                    <ul>
+                        ${selectedProducts.join("")}
+                    </ul>
+                    <p class="total">Total: $${totalPrice}</p>
+                </div>
+            `);
+        });
+    </script>
+</body>
+</html>

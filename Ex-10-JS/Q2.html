@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>23BCE1158</title>
+    <style>
+        .input-field {
+            padding: 5px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="title">Original Title</h1>
+
+    <form>
+        <label for="username">Username:</label>
+        <input type="text" name="username" class="input-field" /><br /><br />
+
+        <label>Gender:</label>
+        <input type="radio" name="gender" value="Male" class="input-field" /> Male
+        <input type="radio" name="gender" value="Female" class="input-field" /> Female
+        <input type="radio" name="gender" value="Other" class="input-field" /> Other
+        <br /><br />
+
+        <label>Hobbies:</label>
+        <input type="checkbox" class="hobby" value="Reading" /> Reading
+        <input type="checkbox" class="hobby" value="Sports" /> Sports
+        <input type="checkbox" class="hobby" value="Music" /> Music
+        <br /><br />
+
+        <button type="button" onclick="applyDOMChanges()">Apply DOM Changes</button>
+    </form>
+
+    <p class="info">Info paragraph 1</p>
+    <p class="info">Info paragraph 2</p>
+    <p>This is a normal paragraph.</p>
+
+    <ul>
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+    </ul>
+
+    <script>
+        function applyDOMChanges() {
+            // Update the title text
+            document.getElementById("title").textContent = "Updated Title";
+
+            // Update username input field
+            document.getElementsByName("username")[0].value = "John Doe";
+
+            // Log selected gender
+            const genderRadios = document.getElementsByName("gender");
+            for (let i = 0; i < genderRadios.length; i++) {
+                if (genderRadios[i].checked) {
+                    console.log("Selected Gender:", genderRadios[i].value);
+                }
+            }
+
+
+            // Log total number of <p> elements
+            const paragraphs = document.getElementsByTagName("p");
+            console.log("Total number of <p> elements:", paragraphs.length);
+
+            // Log list items
+            const listItems = document.getElementsByTagName("li");
+            for (let item of listItems) {
+                console.log("List item:", item.textContent);
+            }
+
+            // Change background color of input fields
+            const inputFields = document.getElementsByClassName("input-field");
+            for (let field of inputFields) {
+                field.style.backgroundColor = "lightblue";
+            }
+
+            // Update first info paragraph
+            document.querySelector(".info").textContent = "This is the first info paragraph";
+
+            // Check the first gender radio button  
+            document.querySelector("input[name='gender']").checked = true;
+
+            // Log and update info paragraphs
+            const infoParagraphs = document.querySelectorAll(".info");
+            infoParagraphs.forEach((p) => console.log("Info paragraph:", p.textContent));
+
+            // Check all hobby checkboxes
+            const hobbies = document.querySelectorAll(".hobby");
+            hobbies.forEach((hobby) => {
+                hobby.checked = true;
+                console.log("Checked Hobby:", hobby.value);
+            });
+        }
+    </script>
+</body>
+</html>
